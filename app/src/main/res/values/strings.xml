@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string name="app_name">MapQuiz</string>
+    <string name="dialog_correct_answer">Correct Answer</string>
+    <string name="dialog_incorrect_answer">Incorrect Answer</string>
+    <string name="play_again">Play Again?</string>
+    <string name="quit">Quit</string>
+</resources>
