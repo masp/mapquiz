@@ -34,7 +34,7 @@ public class MapDbAdapter {
 
     private static final String DATABASE_NAME = "mapquiz";
     private static final String ROUND_TABLE = "round";
-    private static final String GUESS_TABLE = "guess";
+    private static final String QUESTION_TABLE = "question";
     private static final int DATABASE_VERSION = 1;
 
     private final Context mCtx;
@@ -58,16 +58,16 @@ public class MapDbAdapter {
         }
     }
     private static void createDatabase(SQLiteDatabase db){
-    	db.execSQL("CREATE TABLE " + GUESS_TABLE + " ("
+    	db.execSQL("CREATE TABLE " + QUESTION_TABLE + " ("
                 + Guess._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + Guess.ROUND_ID + " INTEGER NOT NULL, "
                 + Guess.CORRECT + " INTEGER NOT NULL, "
                 + Guess.COORD_LAT + " DOUBLE NOT NULL, "
                 + Guess.COORD_LON + " DOUBLE NOT NULL, "
-                + Guess.STATE1 + " STRING NOT NULL, "
-                + Guess.STATE2 + " STRING NOT NULL, "
-                + Guess.STATE3 + " STRING NOT NULL, "
-                + Guess.STATE4 + " STRING NOT NULL, "
+                + Guess.OPTION1 + " STRING NOT NULL, "
+                + Guess.OPTION2 + " STRING NOT NULL, "
+                + Guess.OPTION3 + " STRING NOT NULL, "
+                + Guess.OPTION4 + " STRING NOT NULL, "
                 + Guess.SELECTED + " INTEGER NOT NULL, "
                 + Guess.DATETIME + " INTEGER NOT NULL, "
                 + Guess.TIME2GUESS + " DOUBLE NOT NULL "
@@ -77,13 +77,13 @@ public class MapDbAdapter {
                 + Round._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + Round.PLAYER_ID + " INTEGER NOT NULL, "
                 + Round.QUIZ_TYPE + " INTEGER NOT NULL, "
-                + Round.GUESS1 + " INTEGER NOT NULL, "
-                + Round.GUESS2 + " INTEGER NOT NULL, "
-                + Round.GUESS3 + " INTEGER NOT NULL, "
-                + Round.GUESS4 + " INTEGER NOT NULL, "
-                + Round.GUESS5 + " INTEGER NOT NULL, "
-                + Round.GUESS6 + " INTEGER NOT NULL, "
-                + Round.GUESS7 + " INTEGER NOT NULL "
+                + Round.QUESTION1 + " INTEGER NOT NULL, "
+                + Round.QUESTION2 + " INTEGER NOT NULL, "
+                + Round.QUESTION3 + " INTEGER NOT NULL, "
+                + Round.QUESTION4 + " INTEGER NOT NULL, "
+                + Round.QUESTION5 + " INTEGER NOT NULL, "
+                + Round.QUESTION6 + " INTEGER NOT NULL, "
+                + Round.QUESTION7 + " INTEGER NOT NULL "
                 + ");");
     }
     /**
@@ -142,7 +142,7 @@ public class MapDbAdapter {
     	long Id = 0;
         
         try {
-        Id=mDb.insertOrThrow(GUESS_TABLE, null, initialValues);
+        Id=mDb.insertOrThrow(QUESTION_TABLE, null, initialValues);
        
 //           Toast.makeText(this.mCtx, "Row " + Id + " inserted." , Toast.LENGTH_SHORT).show();
             } catch (SQLException ex){
@@ -187,7 +187,7 @@ public class MapDbAdapter {
      */
     public boolean deleteGuess(long rowId) {
 
-        return mDb.delete(GUESS_TABLE, Guess._ID + "=" + rowId, null) > 0;
+        return mDb.delete(QUESTION_TABLE, Guess._ID + "=" + rowId, null) > 0;
     }
     /**
      * Delete the Round with the given rowId
@@ -215,11 +215,11 @@ public class MapDbAdapter {
      * 
      * @return Cursor over all Guesss
      */
-    public Cursor fetchAllGuesssAll() {
+    public Cursor fetchAllGuessAll() {
 
         Cursor mCursor =
 
-                mDb.query(GUESS_TABLE, null, null,
+                mDb.query(QUESTION_TABLE, null, null,
                         null, null, null, null);
         
        
@@ -236,7 +236,7 @@ public class MapDbAdapter {
     	String orderBy=Guess.DATETIME+ " ASC ";
         Cursor mCursor =
 
-                mDb.query(GUESS_TABLE, null, selection,
+                mDb.query(QUESTION_TABLE, null, selection,
                         null, null, null, orderBy);
         
        
@@ -258,7 +258,7 @@ public class MapDbAdapter {
     	String orderBy=Guess.DATETIME+ " ASC ";
     	Cursor mCursor =
 
-                mDb.query(GUESS_TABLE, null, selection,
+                mDb.query(QUESTION_TABLE, null, selection,
                         null, null, null, orderBy);
         
        
@@ -293,7 +293,7 @@ public class MapDbAdapter {
 
         Cursor mCursor =
 
-                mDb.query(true, GUESS_TABLE, null, Guess._ID + "=" + rowId, null,
+                mDb.query(true, QUESTION_TABLE, null, Guess._ID + "=" + rowId, null,
                         null, null, null, null);
         if (mCursor != null) {
             mCursor.moveToFirst();
@@ -340,13 +340,13 @@ public ContentValues fetchRoundData(long rowId) throws SQLException {
         curVal.put(Round._ID, mCursor.getLong(mCursor.getColumnIndex(Round._ID)));
         curVal.put(Round.PLAYER_ID, mCursor.getLong(mCursor.getColumnIndex(Round.PLAYER_ID)));
         curVal.put(Round.QUIZ_TYPE, mCursor.getInt(mCursor.getColumnIndex(Round.QUIZ_TYPE)));
-        curVal.put(Round.GUESS1, mCursor.getString(mCursor.getColumnIndex(Round.GUESS1)));
-        curVal.put(Round.GUESS2, mCursor.getString(mCursor.getColumnIndex(Round.GUESS2)));
-        curVal.put(Round.GUESS3, mCursor.getString(mCursor.getColumnIndex(Round.GUESS3)));
-        curVal.put(Round.GUESS4, mCursor.getString(mCursor.getColumnIndex(Round.GUESS4)));
-        curVal.put(Round.GUESS5, mCursor.getString(mCursor.getColumnIndex(Round.GUESS5)));
-        curVal.put(Round.GUESS6, mCursor.getString(mCursor.getColumnIndex(Round.GUESS6)));
-        curVal.put(Round.GUESS7, mCursor.getString(mCursor.getColumnIndex(Round.GUESS7)));
+        curVal.put(Round.QUESTION1, mCursor.getString(mCursor.getColumnIndex(Round.QUESTION1)));
+        curVal.put(Round.QUESTION2, mCursor.getString(mCursor.getColumnIndex(Round.QUESTION2)));
+        curVal.put(Round.QUESTION3, mCursor.getString(mCursor.getColumnIndex(Round.QUESTION3)));
+        curVal.put(Round.QUESTION4, mCursor.getString(mCursor.getColumnIndex(Round.QUESTION4)));
+        curVal.put(Round.QUESTION5, mCursor.getString(mCursor.getColumnIndex(Round.QUESTION5)));
+        curVal.put(Round.QUESTION6, mCursor.getString(mCursor.getColumnIndex(Round.QUESTION6)));
+        curVal.put(Round.QUESTION7, mCursor.getString(mCursor.getColumnIndex(Round.QUESTION7)));
 
     }
     
@@ -366,7 +366,7 @@ public ContentValues fetchGuessData(long rowId) throws SQLException {
 	ContentValues curVal=new ContentValues();
     Cursor mCursor =
 
-    	mDb.query(true, GUESS_TABLE, null, Guess._ID + "=" + rowId, null,
+    	mDb.query(true, QUESTION_TABLE, null, Guess._ID + "=" + rowId, null,
                 null, null, null, null);
     if (mCursor != null) {
         mCursor.moveToFirst();
@@ -376,10 +376,10 @@ public ContentValues fetchGuessData(long rowId) throws SQLException {
         curVal.put(Guess.DATETIME, mCursor.getLong(mCursor.getColumnIndex(Guess.DATETIME)));
         curVal.put(Guess.COORD_LAT, mCursor.getDouble(mCursor.getColumnIndex(Guess.COORD_LAT)));
         curVal.put(Guess.COORD_LON, mCursor.getDouble(mCursor.getColumnIndex(Guess.COORD_LON)));
-        curVal.put(Guess.STATE1, mCursor.getString(mCursor.getColumnIndex(Guess.STATE1)));
-        curVal.put(Guess.STATE2, mCursor.getString(mCursor.getColumnIndex(Guess.STATE2)));
-        curVal.put(Guess.STATE3, mCursor.getString(mCursor.getColumnIndex(Guess.STATE3)));
-        curVal.put(Guess.STATE4, mCursor.getString(mCursor.getColumnIndex(Guess.STATE4)));
+        curVal.put(Guess.OPTION1, mCursor.getString(mCursor.getColumnIndex(Guess.OPTION1)));
+        curVal.put(Guess.OPTION2, mCursor.getString(mCursor.getColumnIndex(Guess.OPTION2)));
+        curVal.put(Guess.OPTION3, mCursor.getString(mCursor.getColumnIndex(Guess.OPTION3)));
+        curVal.put(Guess.OPTION4, mCursor.getString(mCursor.getColumnIndex(Guess.OPTION4)));
         curVal.put(Guess.SELECTED, mCursor.getInt(mCursor.getColumnIndex(Guess.SELECTED)));
         curVal.put(Guess.TIME2GUESS, mCursor.getDouble(mCursor.getColumnIndex(Guess.TIME2GUESS)));
 
@@ -401,7 +401,7 @@ public ContentValues fetchGuessData(long rowId) throws SQLException {
      */
     public boolean updateGuess(long rowId, ContentValues args) {
         
-        return mDb.update(GUESS_TABLE, args, Guess._ID + "=" + rowId, null) > 0;
+        return mDb.update(QUESTION_TABLE, args, Guess._ID + "=" + rowId, null) > 0;
     }
     /**
      * Update the Round using the details provided. The Round to be updated is
@@ -462,7 +462,7 @@ public ContentValues fetchGuessData(long rowId) throws SQLException {
 
 	
 	public static boolean upgradeDatabase() {
-		SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(new File("/data/data/com.asp.gasrecord/databases/" + DATABASE_NAME), null);
+		SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(new File("/data/data/com.asp.mapquiz/databases/" + DATABASE_NAME), null);
 		boolean result = upgradeDatabase(db);
 		db.close();
 		return result;
@@ -481,7 +481,7 @@ public ContentValues fetchGuessData(long rowId) throws SQLException {
 		try {
 			StringBuilder sb = new StringBuilder();
 			if (oldVersion == 1) {
-				//sb.append("ALTER TABLE ").append(GUESS_TABLE).append(" ADD COLUMN ").append(Guess.ECONOMY_UNITS).append(" INTEGER;");
+				//sb.append("ALTER TABLE ").append(QUESTION_TABLE).append(" ADD COLUMN ").append(Guess.ECONOMY_UNITS).append(" INTEGER;");
 				//db.execSQL(sb.toString());
 				return;
 			} 
@@ -493,7 +493,7 @@ public ContentValues fetchGuessData(long rowId) throws SQLException {
 				return;
 			} 
 			sb.setLength(0);
-			sb.append("DROP TABLE IF EXISTS ").append(GUESS_TABLE).append(";");
+			sb.append("DROP TABLE IF EXISTS ").append(QUESTION_TABLE).append(";");
 			db.execSQL(sb.toString());
 
 			

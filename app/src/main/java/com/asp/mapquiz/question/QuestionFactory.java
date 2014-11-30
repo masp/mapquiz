@@ -11,8 +11,7 @@ public class QuestionFactory {
     }
 
     public enum QuizType {
-        STATE(0);
-
+        US_STATE(0),EUROPE_COUNTRY(1);
         private int mId;
 
         private QuizType(int i) {

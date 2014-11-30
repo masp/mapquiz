@@ -22,7 +22,7 @@ public class LocationSelectActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_select);
-        QuestionFactory.addQuestionFactory(QuestionFactory.QuizType.STATE,
+        QuestionFactory.addQuestionFactory(QuestionFactory.QuizType.US_STATE,
                 new StateQuestionFactory(this));
         mMapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.location_select_map_fragment);
@@ -30,7 +30,7 @@ public class LocationSelectActivity extends FragmentActivity {
     }
 
     private void showNextQuestion() {
-        final Question question = QuestionFactory.createQuestion(QuestionFactory.QuizType.STATE);
+        final Question question = QuestionFactory.createQuestion(QuestionFactory.QuizType.US_STATE);
         mQuestionFragment = QuestionFragment.createFragment(
                 mMapFragment.getMap(), mQuestionListener, question);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

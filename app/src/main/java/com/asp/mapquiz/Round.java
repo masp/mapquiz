@@ -7,11 +7,11 @@ public class Round {
     public static final String _ID = "_id";
     public static final String PLAYER_ID = "playerid";
     public static final String QUIZ_TYPE = "quiztype";
-    public static final String GUESS1 = "guess1";
-    public static final String GUESS2 = "guess2";
-    public static final String GUESS3 = "guess3";
-    public static final String GUESS4 = "guess4";
-    public static final String GUESS5 = "guess5";
-    public static final String GUESS6 = "guess6";
-    public static final String GUESS7 = "guess7";
+    public static final String QUESTION1 = "question1";
+    public static final String QUESTION2 = "question2";
+    public static final String QUESTION3 = "question3";
+    public static final String QUESTION4 = "question4";
+    public static final String QUESTION5 = "question5";
+    public static final String QUESTION6 = "question6";
+    public static final String QUESTION7 = "question7";
 }
