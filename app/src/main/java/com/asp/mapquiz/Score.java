@@ -11,13 +11,15 @@ public class Score {
     private State mState;
     private List<State> mStates;
     private long mDuration;
+    private int mQuizType;
 
-    public Score(long playerID, boolean correct, State selectedState, List<State> states, long duration){
+    public Score(long playerID, boolean correct, State selectedState, List<State> states, long duration, int quizType){
         mPlayerID=playerID;
         mCorrect=correct;
         mState=selectedState;
         mStates=states;
         mDuration=duration;
+
 
     }
 
