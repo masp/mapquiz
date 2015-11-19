@@ -1,13 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MapQuiz</string>
+    <string name="game_activity">Game</string>
+    <string name="summary_activity">Summary</string>
+
+    <string name="no_network_title">No Network Found</string>
+    <string name="no_network_message">MapQuiz requires a network connection in order to work.
+        Please connect to an internet connection to continue.</string>
+
+    <string name="correct">Correct!</string>
+    <string name="wrong">Wrong!</string>
+    <string name="next_question">Continue</string>
+
+    <string name="wrong_mark">\u274C</string>
+    <string name="correct_mark">\u2713</string>
+
     <string name="dialog_correct_answer">Correct Answer</string>
     <string name="dialog_incorrect_answer">Incorrect Answer</string>
     <string name="play_again">Play Again?</string>
+    <string name="game_over">Game Over</string>
+    <string name="back_to_menu">Back to menu</string>
     <string name="quit">Quit</string>
 
-    <string name="start_game">Start Game</string>
+    <string name="to_the_death_button">To the death!</string>
+    <string name="best_of_10_button">Best of 10</string>
+    <string name="quit_game">Exit</string>
+
+    <string name="easy_mode">Easy</string>
+    <string name="moderate_mode">Moderate</string>
+    <string name="hard_mode">Hard</string>
+
+    <string name="states_quiz_type">U.S. States</string>
+    <string name="european_country_quiz_type">European Countries</string>
 
     <string name="marker_title">Where is this?</string>
-    <string name="marker_snippet"></string>
+
+    <string name="final_score_summary_header">Your Final Score</string>
 </resources>

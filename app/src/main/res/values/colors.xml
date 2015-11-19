@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="blue" type="color">#2196F3</item>
+    <item name="transparent_blue" type="color">#AA2196F3</item>
+    <item name="transparent_green" type="color">#AA4CAF50</item>
+    <item name="transparent_red" type="color">#AADD2C00</item>
+    <item name="transparent_black" type="color">#AA000000</item>
+    <item name="white" type="color">#FFFFFF</item>
+</resources>

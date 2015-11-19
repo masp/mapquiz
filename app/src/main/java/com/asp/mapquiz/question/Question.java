@@ -6,9 +6,9 @@ import java.util.List;
 
 /**
  * Represents a question with a certain state:
- * <p>Modifies the map
- * <p>Determines the question
- * <p>Judges the answer the user provides
+ * - Modifies the map
+ * - Determines the question
+ * - Judges the answer the user provides
  */
 public interface Question {
     public void changeMap(GoogleMap map);

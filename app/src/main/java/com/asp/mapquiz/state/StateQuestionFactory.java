@@ -2,6 +2,7 @@ package com.asp.mapquiz.state;
 
 import android.content.Context;
 
+import com.asp.mapquiz.game.Mode;
 import com.asp.mapquiz.question.Question;
 import com.asp.mapquiz.question.QuestionFactory;
 import com.asp.mapquiz.R;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class StateQuestionFactory implements QuestionFactory.QuestionTypeConstructor {
+public class StateQuestionFactory implements QuestionFactory.QuestionTypeFactory {
     private List<StateOption> mStateOptions;
     private Context mContext;
     private Random mRandom = new Random();
@@ -30,14 +31,15 @@ public class StateQuestionFactory implements QuestionFactory.QuestionTypeConstru
                 String tag = xmlParser.getName();
                 switch (eventType) {
                     case XmlPullParser.START_DOCUMENT:
-                        mStateOptions = new ArrayList<StateOption>();
+                        mStateOptions = new ArrayList<>();
                         break;
                     case XmlPullParser.START_TAG:
                         if ("state".equals(tag)) {
-                            currState = new StateOption.StateBuilder(xmlParser.getAttributeValue(0));
+                            currState = new StateOption.StateBuilder(
+                                    xmlParser.getAttributeValue(null, "name"));
                         } else if (currState != null && "point".equals(tag)) {
-                            double lat = Double.parseDouble(xmlParser.getAttributeValue(0));
-                            double lng = Double.parseDouble(xmlParser.getAttributeValue(1));
+                            double lat = Double.parseDouble(xmlParser.getAttributeValue(null, "lat"));
+                            double lng = Double.parseDouble(xmlParser.getAttributeValue(null, "lng"));
                             currState.addPoint(new LatLng(lat, lng));
                         }
                         break;
@@ -49,18 +51,16 @@ public class StateQuestionFactory implements QuestionFactory.QuestionTypeConstru
                 }
                 eventType = xmlParser.next();
             }
-        } catch (XmlPullParserException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
-        } catch (IOException io) {
-            io.printStackTrace();
         }
     }
 
     @Override
-    public Question createQuestion() {
+    public Question createQuestion(Mode.Difficulty difficulty) {
         List<StateOption> options = getRandomStates(mRandom);
         StateOption correct = options.remove(mRandom.nextInt(options.size()));
-        return new StateQuestion(mContext, correct, options);
+        return new StateQuestion(mContext, difficulty, correct, options);
     }
 
     private List<StateOption> getRandomStates(Random random) {

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
 
+import com.asp.mapquiz.game.Mode;
 import com.asp.mapquiz.question.Option;
 import com.asp.mapquiz.question.Question;
 import com.asp.mapquiz.R;
@@ -14,30 +15,33 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolygonOptions;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
  * StateQuestion represents any question which deals with the United States as possible answers
  */
 public class StateQuestion implements Question {
-    private static final int ZOOM_LEVEL = 9;
     private static final int OUTLINE_STROKE_WIDTH = 5;
     private static final int OUTLINE_COLOR = Color.RED;
 
     private Context mContext;
     private StateOption mCorrect;
     private List<StateOption> mWrongs;
+    private Mode.Difficulty mDifficulty;
 
     /**
      * @param context Context of the question
      * @param wrongs <b>Must be three(3) wrong options</b>
      * @param correct The option that is correct
      */
-    public StateQuestion(Context context, StateOption correct, List<StateOption> wrongs) {
+    public StateQuestion(Context context, Mode.Difficulty difficulty, StateOption correct,
+                         List<StateOption> wrongs) {
         if (wrongs.size() != 3)
             throw new IllegalArgumentException("You must pass three wrong options to " +
                     "the StateQuestion constructor!");
         mContext = context;
+        mDifficulty = difficulty;
         mCorrect = correct;
         mWrongs = new ArrayList<StateOption>(wrongs);
     }
@@ -48,11 +52,10 @@ public class StateQuestion implements Question {
         LatLng loc = mCorrect.getRandomPoint();
         final Iterable<LatLng> outline = mCorrect.getPoints();
         map.clear();
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, ZOOM_LEVEL));
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, mDifficulty.getZoomLevel()));
         Resources res = mContext.getResources();
         map.addMarker(new MarkerOptions()
                 .title(res.getString(R.string.marker_title))
-                .snippet(res.getString(R.string.marker_snippet))
                 .position(loc));
         map.addPolygon(new PolygonOptions()
                 .strokeColor(OUTLINE_COLOR)
@@ -75,9 +78,6 @@ public class StateQuestion implements Question {
 
     @Override
     public void updateMap(Option chosenOption, GoogleMap map) {
-        if (!(chosenOption instanceof StateOption))
-            throw new IllegalArgumentException("Must pass StateOption to StateQuestion");
-        StateOption stateOption = (StateOption) chosenOption;
-        map.animateCamera(CameraUpdateFactory.newLatLngBounds(stateOption.getBounds(), 80));
+        map.animateCamera(CameraUpdateFactory.newLatLngBounds(mCorrect.getBounds(), 80));
     }
 }
