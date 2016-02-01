@@ -9,5 +9,5 @@
     <!-- Summary Screen -->
     <dimen name="summary_screen_padding">32dp</dimen>
     <dimen name="summary_game_over_margin">12dp</dimen>
-    <dimen name="summary_box_center_offset">dp</dimen>
+    <dimen name="summary_box_center_offset">10dp</dimen>
 </resources>

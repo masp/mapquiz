@@ -2,8 +2,10 @@ package com.asp.mapquiz.menu;
 
 import android.app.Activity;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.asp.mapquiz.database.MapQuizDbHelper;
 import com.asp.mapquiz.game.GameType;
 import com.asp.mapquiz.game.Mode;
 import com.asp.mapquiz.R;

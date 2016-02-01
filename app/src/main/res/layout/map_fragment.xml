@@ -12,4 +12,4 @@
     map:uiScrollGestures="false"
     map:uiTiltGestures="false"
     map:uiZoomControls="false"
-    map:uiZoomGestures="false"/>
+    map:uiZoomGestures="true"/>

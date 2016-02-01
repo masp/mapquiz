@@ -23,41 +23,43 @@ public class StateQuestionFactory implements QuestionFactory.QuestionTypeFactory
 
     public StateQuestionFactory(Context context) {
         mContext = context;
-        XmlPullParser xmlParser = context.getResources().getXml(R.xml.states);
-        try {
-            StateOption.StateBuilder currState = null;
-            int eventType = xmlParser.getEventType();
-            while (eventType != XmlPullParser.END_DOCUMENT) {
-                String tag = xmlParser.getName();
-                switch (eventType) {
-                    case XmlPullParser.START_DOCUMENT:
-                        mStateOptions = new ArrayList<>();
-                        break;
-                    case XmlPullParser.START_TAG:
-                        if ("state".equals(tag)) {
-                            currState = new StateOption.StateBuilder(
-                                    xmlParser.getAttributeValue(null, "name"));
-                        } else if (currState != null && "point".equals(tag)) {
-                            double lat = Double.parseDouble(xmlParser.getAttributeValue(null, "lat"));
-                            double lng = Double.parseDouble(xmlParser.getAttributeValue(null, "lng"));
-                            currState.addPoint(new LatLng(lat, lng));
-                        }
-                        break;
-                    case XmlPullParser.END_TAG:
-                        if (currState != null && "state".equals(tag)) {
-                            mStateOptions.add(currState.build());
-                        }
-                        break;
-                }
-                eventType = xmlParser.next();
+    }
+
+    public void loadFileData(int statesXmlResource) throws Exception {
+        XmlPullParser xmlParser = mContext.getResources().getXml(statesXmlResource);
+        StateOption.StateBuilder currState = null;
+        int eventType = xmlParser.getEventType();
+        while (eventType != XmlPullParser.END_DOCUMENT) {
+            String tag = xmlParser.getName();
+            switch (eventType) {
+                case XmlPullParser.START_DOCUMENT:
+                    mStateOptions = new ArrayList<>();
+                    break;
+                case XmlPullParser.START_TAG:
+                    if ("state".equals(tag)) {
+                        currState = new StateOption.StateBuilder(
+                                xmlParser.getAttributeValue(null, "name"));
+                    } else if (currState != null && "point".equals(tag)) {
+                        double lat = Double.parseDouble(xmlParser.getAttributeValue(null, "lat"));
+                        double lng = Double.parseDouble(xmlParser.getAttributeValue(null, "lng"));
+                        currState.addPoint(new LatLng(lat, lng));
+                    }
+                    break;
+                case XmlPullParser.END_TAG:
+                    if (currState != null && "state".equals(tag)) {
+                        mStateOptions.add(currState.build());
+                    }
+                    break;
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+            eventType = xmlParser.next();
         }
     }
 
     @Override
     public Question createQuestion(Mode.Difficulty difficulty) {
+        if (!isInitialized())
+            throw new IllegalArgumentException("You must call loadFileData before the factory " +
+                    "can create questions!");
         List<StateOption> options = getRandomStates(mRandom);
         StateOption correct = options.remove(mRandom.nextInt(options.size()));
         return new StateQuestion(mContext, difficulty, correct, options);
@@ -76,5 +78,9 @@ public class StateQuestionFactory implements QuestionFactory.QuestionTypeFactory
             stateOptions.add(stateOption);
         }
         return stateOptions;
+    }
+
+    public boolean isInitialized() {
+        return mStateOptions != null && mStateOptions.size() != 0;
     }
 }

@@ -2,6 +2,7 @@ package com.asp.mapquiz.game;
 
 public class ToTheDeathGame implements GameType {
     private int mScore;
+    private int mRight;
     private boolean wasWrong;
 
     public ToTheDeathGame() {
@@ -9,21 +10,17 @@ public class ToTheDeathGame implements GameType {
     }
 
     @Override
-    public boolean shouldAskAnother(boolean wasCorrect) {
-        if (wasCorrect) mScore++;
+    public boolean shouldAskAnother(int secondsRemaining, boolean wasCorrect) {
+        if (wasCorrect) {
+            mScore += secondsRemaining;
+            mRight++;
+        }
         else wasWrong = true;
         return wasCorrect;
     }
 
     @Override
-    public int getQuestionsRight() {
-        return mScore;
-    }
-
-    @Override
-    public int getTotalQuestions() {
-        int totalScore = mScore;
-        if (wasWrong) totalScore++;
-        return totalScore;
+    public ScorePair getScore() {
+        return new ScorePair(mScore, mRight, wasWrong ? 1 : 0);
     }
 }

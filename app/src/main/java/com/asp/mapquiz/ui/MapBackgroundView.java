@@ -16,6 +16,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.Random;
 
 public class MapBackgroundView extends ImageView {
@@ -29,21 +30,11 @@ public class MapBackgroundView extends ImageView {
 
     private Random random;
 
-    private Bitmap mMapBitmap;
-
     private void init(Context context) {
         random = new Random();
-        try {
-            AssetManager assets = context.getAssets();
-            String[] backgroundFileNameList = assets.list("backgrounds");
-            mMapBitmap = BitmapFactory.decodeStream(assets.open("backgrounds/" + backgroundFileNameList[0]));
-            setImageBitmap(Bitmap.createScaledBitmap(mMapBitmap,
-                    mMapBitmap.getWidth() * 2, mMapBitmap.getHeight() * 2, false));
-        } catch (IOException ex) {
-            Log.e(BACKGROUND_VIEW, "Error trying to locate backgrounds asset directory for " +
-                    "background assets");
-            ex.printStackTrace();
-        }
+
+        MapBackground.BitmapManager bpManager = MapBackground.BitmapManager.getInstance();
+        setImageBitmap(bpManager.getMapBitmap(context));
     }
 
     public MapBackgroundView(Context context) {

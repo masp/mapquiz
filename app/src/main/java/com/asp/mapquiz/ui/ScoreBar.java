@@ -2,18 +2,25 @@ package com.asp.mapquiz.ui;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.asp.mapquiz.R;
+import com.asp.mapquiz.game.GameType;
+import com.asp.mapquiz.game.Mode;
+import com.asp.mapquiz.game.ScorePair;
+import com.asp.mapquiz.question.QuestionFactory;
 
 import java.util.concurrent.TimeUnit;
 
 public class ScoreBar extends FrameLayout {
-    private long mMilliseconds;
+    private int mTimeLimit;
+    private int mRemainingSeconds;
 
+    private TextView mGamemode;
     private TextView mClock;
     private TextView mCorrect;
     private TextView mWrong;
@@ -38,25 +45,48 @@ public class ScoreBar extends FrameLayout {
                 .inflate(R.layout.score_board, null);
         addView(layout);
 
+        mGamemode = (TextView) findViewById(R.id.game_mode_type);
         mClock = (TextView) findViewById(R.id.score_board_clock);
         mCorrect = (TextView) findViewById(R.id.score_board_correct);
         mWrong = (TextView) findViewById(R.id.score_board_wrong);
+        mRemainingSeconds = 0;
     }
 
-    public void setCorrect(int numCorrect) {
-        mCorrect.setText(Integer.toString(numCorrect));
+    public void setTimeLimit(int seconds) {
+        mTimeLimit = seconds;
+        mRemainingSeconds = mTimeLimit;
     }
 
-    public void setIncorrect(int numWrong) {
-        mWrong.setText(Integer.toString(numWrong));
+    public void setDifficulty(Mode.Difficulty difficulty) {
+        mGamemode.setText(prettify(difficulty));
     }
 
-    public void updateTime(long millis) {
-        mMilliseconds += millis;
-        String formattedTime = String.format("%02d:%02d",
-                TimeUnit.MILLISECONDS.toMinutes(mMilliseconds),
-                TimeUnit.MILLISECONDS.toSeconds(mMilliseconds) -
-                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(mMilliseconds)));
-        mClock.setText(formattedTime);
+    private String prettify(Mode.Difficulty difficulty) {
+        String blankName = difficulty.name().replaceAll("_", "");
+        blankName = blankName.substring(0,1).toUpperCase() + blankName.substring(1).toLowerCase();
+        return blankName;
+    }
+
+    public void setScore(ScorePair score) {
+        mCorrect.setText(String.valueOf(score.getNumberCorrectAnswers()));
+        mWrong.setText(String.valueOf(score.getNumberWrongAnswers()));
+    }
+
+    public void resetTimer() {
+        mRemainingSeconds = mTimeLimit;
+        updateClockUI();
+    }
+
+    public void tickDown() {
+        mRemainingSeconds--;
+        updateClockUI();
+    }
+
+    public int getRemainingTime() {
+        return mRemainingSeconds;
+    }
+
+    private void updateClockUI() {
+        mClock.setText(String.valueOf(mRemainingSeconds));
     }
 }

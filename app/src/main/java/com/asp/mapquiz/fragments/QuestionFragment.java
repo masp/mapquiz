@@ -55,17 +55,19 @@ public class QuestionFragment extends Fragment {
             mOptions[i].setText(option.getName());
             mOptions[i].setOnClickListener(mAnswerListener);
         }
-
-        mQuestion.changeMap(mMap);
         return v;
+    }
+
+    public void selectAnswer(Option option) {
+        // Reveal the answer to the user
+        mQuestion.updateMap(option, mMap);
+        mListener.onChosen(mQuestion, option);
     }
 
     private final View.OnClickListener mAnswerListener = new View.OnClickListener() {
         public void onClick(View v) {
             Option option = (Option) v.getTag();
-            // Reveal the answer to the user
-            mQuestion.updateMap(option, mMap);
-            mListener.onChosen(mQuestion, option);
+            selectAnswer(option);
         }
     };
 }

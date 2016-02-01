@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:orientation="vertical">
+
+    <TextView android:id="@+id/score_box_header"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_gravity="center"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView android:id="@+id/score_box_correct"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="#212121"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:text="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/correct_mark"
+            android:layout_marginRight="10dp"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/holo_green_dark" />
+
+
+        <TextView android:id="@+id/score_box_wrong"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="#212121"
+            android:layout_marginLeft="10dp"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:text="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/wrong_mark"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/holo_red_dark" />
+    </LinearLayout>
+</LinearLayout>

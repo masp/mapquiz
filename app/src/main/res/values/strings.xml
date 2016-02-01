@@ -8,21 +8,28 @@
     <string name="no_network_message">MapQuiz requires a network connection in order to work.
         Please connect to an internet connection to continue.</string>
 
+    <string name="pick_email">MapQuiz requires you to pick a username to store data</string>
+
     <string name="correct">Correct!</string>
     <string name="wrong">Wrong!</string>
     <string name="next_question">Continue</string>
 
+    <string name="try_again_loading_map">Map has not loaded - please wait!</string>
     <string name="wrong_mark">\u274C</string>
     <string name="correct_mark">\u2713</string>
+    <string name="loading">Loading&#8230;</string>
+    <string name="not_loading">Not loading?</string>
 
     <string name="dialog_correct_answer">Correct Answer</string>
     <string name="dialog_incorrect_answer">Incorrect Answer</string>
     <string name="play_again">Play Again?</string>
     <string name="game_over">Game Over</string>
+    <string name="game_heading">#difficulty#</string>
     <string name="back_to_menu">Back to menu</string>
     <string name="quit">Quit</string>
 
     <string name="to_the_death_button">To the death!</string>
+    <string name="test_reset_database">Reset Database</string>
     <string name="best_of_10_button">Best of 10</string>
     <string name="quit_game">Exit</string>
 
@@ -35,5 +42,6 @@
 
     <string name="marker_title">Where is this?</string>
 
-    <string name="final_score_summary_header">Your Final Score</string>
+    <string name="final_score_summary_header">Round Score</string>
+    <string name="highscore_header">Your Highscore</string>
 </resources>

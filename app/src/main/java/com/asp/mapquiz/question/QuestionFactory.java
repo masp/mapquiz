@@ -18,6 +18,15 @@ public class QuestionFactory {
             mId = i;
         }
 
+        public static QuizType getQuizTypeByid(int id) {
+            for (QuizType type : values()) {
+                if (type.equals(id)) {
+                    return type;
+                }
+            }
+            return null;
+        }
+
         public int getId() {
             return mId;
         }

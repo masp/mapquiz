@@ -26,18 +26,14 @@ public class MenuFragment extends Fragment {
      * Create menu fragment that handles the UI changes for the menu
      *
      * @param context Needed because Fragment hasn't been initialized yet
-     * @param menus Menus in order of start to finish
      * @return
      */
-    public static MenuFragment createFragment(Context context, MenuCompletionListener listener,
-                                              Menu.MenuBuilder... menus) {
+    public static MenuFragment createFragment(Context context, Menu.MenuBuilder rootMenu,
+                                              MenuCompletionListener listener) {
         MenuFragment fragment = new MenuFragment();
 
         fragment.mListener = listener;
-        fragment.mMenus = new ArrayList<>();
-        for (Menu.MenuBuilder menu : menus) {
-            fragment.mMenus.add(menu.build(context, fragment.mMenuListener));
-        }
+        fragment.addMenu(context, rootMenu);
         fragment.mCurrentMenuIndex = 0; // start at root menu
 
         return fragment;
@@ -54,13 +50,19 @@ public class MenuFragment extends Fragment {
     };
     private MenuCompletionListener mListener;
 
-    private List<Menu> mMenus;
+    private List<Menu> mMenus = new ArrayList<>();;
     private int mCurrentMenuIndex;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         mContainer = (FrameLayout) inflater.inflate(R.layout.menu_fragment, null);
+        if (mMenus.size() == 0) return mContainer;
         mContainer.addView(mMenus.get(mCurrentMenuIndex));
         return mContainer;
+    }
+
+    public MenuFragment addMenu(Context context, Menu.MenuBuilder menu) {
+        mMenus.add(menu.build(context, mMenuListener));
+        return this;
     }
 
     public boolean nextMenu() {

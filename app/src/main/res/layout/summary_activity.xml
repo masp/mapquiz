@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/summary_root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -13,86 +15,91 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="center">
-        <RelativeLayout
+
+        <TextView android:id="@+id/game_over_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/summary_game_over_margin"
+            android:textSize="48sp"
+            android:text="@string/game_over"
+            android:textStyle="bold"
+            android:textColor="@android:color/holo_red_light"
+            android:shadowColor="#000000"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/summary_game_over_margin"/>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_marginLeft="@dimen/summary_screen_padding"
             android:layout_marginRight="@dimen/summary_screen_padding"
             android:layout_marginBottom="@dimen/summary_box_center_offset"
+            android:paddingBottom="20dp"
             android:layout_gravity="center"
             android:background="@android:drawable/dialog_holo_light_frame">
 
-            <TextView android:id="@+id/game_over_heading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/summary_game_over_margin"
-                android:layout_centerHorizontal="true"
-                android:layout_alignParentTop="true"
-                android:textSize="38sp"
-                android:text="@string/game_over"
-                android:textColor="@android:color/holo_red_light"
-                android:shadowColor="#000000"
-                android:shadowDx="1"
-                android:shadowDy="1"
-                android:shadowRadius="1"/>
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/gamemode_heading"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/game_over_heading"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="@dimen/summary_game_over_margin"
-                android:orientation="vertical">
-                <TextView android:id="@+id/summary_score_heading"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/final_score_summary_header"
-                    android:gravity="center_horizontal"
-                    android:textStyle="bold"
-                    android:textSize="24dp"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+                android:textStyle="bold"
+                android:textColor="@color/md_grey_800"
+                android:textSize="30sp"
+                android:gravity="center"/>
 
-                    <TextView android:id="@+id/summary_correct"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:textColor="#212121"
-                        android:textSize="28sp"
-                        android:textStyle="bold"
-                        android:text="0" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="24sp"
+                android:text="@string/final_score_summary_header"
+                android:textStyle="bold"
+                android:textColor="@color/md_grey_800" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="@string/correct_mark"
-                        android:layout_marginRight="10dp"
-                        android:textSize="28sp"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/holo_green_dark" />
+            <com.asp.mapquiz.ui.ScoreBox
+                android:id="@+id/final_score_progress_bar"
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:layout_marginBottom="20dp"
+                app:rcIconSrc="@drawable/ic_checkmark_holo_white"
+                app:rcIconSize="28dp"
+                app:rcIconBackgroundColor="@color/md_green_700"
+                app:rcRadius="2dp"
+                app:rcBackgroundColor="@color/md_grey_500"
+                app:rcProgressColor="@color/md_green_500"
+                app:rcTextProgressSize="20sp"/>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="24sp"
+                android:text="@string/highscore_header"
+                android:textStyle="bold"
+                android:textColor="@color/md_grey_800" />
 
-                    <TextView android:id="@+id/summary_wrong"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:textColor="#212121"
-                        android:layout_marginLeft="10dp"
-                        android:textSize="28sp"
-                        android:textStyle="bold"
-                        android:text="0" />
+            <com.asp.mapquiz.ui.ScoreBox
+                android:id="@+id/high_score_progress_bar"
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                app:rcIconSrc="@drawable/ic_checkmark_holo_white"
+                app:rcIconSize="28dp"
+                app:rcIconBackgroundColor="@color/md_green_700"
+                app:rcRadius="2dp"
+                app:rcBackgroundColor="@color/md_grey_500"
+                app:rcProgressColor="@color/md_green_500"
+                app:rcTextProgressSize="20sp"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="@string/wrong_mark"
-                        android:textSize="28sp"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/holo_red_dark" />
-                </LinearLayout>
-            </LinearLayout>
-        </RelativeLayout>
+        </LinearLayout>
 
         <Button android:id="@+id/summary_try_again"
             android:layout_width="wrap_content"

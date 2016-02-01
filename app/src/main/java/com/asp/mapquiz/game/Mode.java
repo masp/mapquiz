@@ -7,16 +7,36 @@ import com.asp.mapquiz.question.QuestionFactory;
  */
 public class Mode {
     public enum Difficulty {
-        HARD(11), MODERATE(9), EASY(7);
+        HARD(0, 12), MODERATE(1, 10), EASY(2, 8);
 
-        private int mZoomLevel;
+        private int zoomLevel;
+        private int id;
 
-        Difficulty(int zoomLevel) {
-            mZoomLevel = zoomLevel;
+        Difficulty(int id, int zoomLevel) {
+            this.id = id;
+            this.zoomLevel = zoomLevel;
+        }
+
+        public static Difficulty getDifficultyById(int id) {
+            for (Difficulty diff : values()) {
+                if (diff.getId() == id) {
+                    return diff;
+                }
+            }
+            return null;
+        }
+
+        public static String getReadableName(Difficulty difficulty) {
+            return difficulty.name().substring(0, 1).toUpperCase() +
+                    difficulty.name().substring(1).toLowerCase();
         }
 
         public int getZoomLevel() {
-            return mZoomLevel;
+            return zoomLevel;
+        }
+
+        public int getId() {
+            return id;
         }
     }
 
@@ -40,6 +60,36 @@ public class Mode {
 
     public GameType.Name getGameType() {
         return mGameType;
+    }
+
+    /* Mode ID is uniquely expressed using the first 1 digit for game type, the next digit
+     * for quiz type, and the next digit for difficulty
+     */
+    public int getModeId() {
+        int modeId = mGameType.getId() * 100 + mQuizType.getId() * 10 + mDifficulty.getId() * 1;
+        return modeId;
+    }
+
+    public Difficulty getDifficultyFromId(int modeId) {
+        return Difficulty.getDifficultyById(splitId(modeId)[0]);
+    }
+
+    public QuestionFactory.QuizType getQuizTypeFromId(int modeId) {
+        return QuestionFactory.QuizType.getQuizTypeByid(splitId(modeId)[1]);
+    }
+
+    public GameType.Name getGameTypeFromId(int modeId) {
+        return GameType.Name.getGameTypeById(splitId(modeId)[2]);
+    }
+
+    // elements go as follows: difficulty, quiztype, gametype
+    private int[] splitId(int modeId) {
+        int[] data = new int[3];
+        for (int i = 0; i < 3; i++) {
+            data[i] = modeId % 10;
+            modeId /= 10;
+        }
+        return data;
     }
 
     public static class ModeBuilder {

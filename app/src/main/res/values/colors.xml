@@ -6,4 +6,9 @@
     <item name="transparent_red" type="color">#AADD2C00</item>
     <item name="transparent_black" type="color">#AA000000</item>
     <item name="white" type="color">#FFFFFF</item>
+    <item name="md_grey_500" type="color">#9E9E9E</item>
+    <item name="md_grey_300" type="color">#E0E0E0</item>
+    <item name="md_green_500" type="color">#4CAF50</item>
+    <item name="md_green_700" type="color">#388E3C</item>
+    <item name="md_grey_800" type="color">#424242</item>
 </resources>
