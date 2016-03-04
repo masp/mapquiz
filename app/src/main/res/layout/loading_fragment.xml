@@ -5,6 +5,6 @@
     <Button android:id="@+id/loading_button"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textSize="28sp"
+        android:textSize="@dimen/loading_button_size"
         android:text="@string/loading"/>
 </LinearLayout>

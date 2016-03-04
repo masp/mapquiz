@@ -23,7 +23,7 @@
         android:layout_gravity="top|center_horizontal"
         android:orientation="vertical"
         android:maxWidth="150dp">
-        <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+        <com.asp.placequiz.ui.TimerBar
             android:id="@+id/game_timer_bar"
             android:layout_width="match_parent"
             android:layout_height="6dp"
@@ -33,7 +33,7 @@
             app:rcProgress="1000"
             app:rcMax="1000"/>
 
-        <com.asp.mapquiz.ui.ScoreBar
+        <com.asp.placequiz.ui.ScoreBar
             android:id="@+id/score_bar"
             android:layout_width="match_parent"
             android:layout_height="48dp"

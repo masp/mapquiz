@@ -6,6 +6,8 @@
     <dimen name="map_padding_top">8dp</dimen>
     <dimen name="answer_popup_text_size">48sp</dimen>
 
+    <dimen name="loading_button_size">28sp</dimen>
+
     <!-- Summary Screen -->
     <dimen name="summary_screen_padding">32dp</dimen>
     <dimen name="summary_game_over_margin">12dp</dimen>

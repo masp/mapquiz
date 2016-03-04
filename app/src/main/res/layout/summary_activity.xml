@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.asp.mapquiz.ui.MapBackgroundView android:id="@+id/menu_background"
+    <com.asp.placequiz.ui.MapBackgroundView
+        android:id="@+id/menu_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="matrix" />
@@ -61,7 +62,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/md_grey_800" />
 
-            <com.asp.mapquiz.ui.ScoreBox
+            <com.asp.placequiz.ui.ScoreBox
                 android:id="@+id/final_score_progress_bar"
                 android:layout_width="match_parent"
                 android:layout_height="28dp"
@@ -85,7 +86,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/md_grey_800" />
 
-            <com.asp.mapquiz.ui.ScoreBox
+            <com.asp.placequiz.ui.ScoreBox
                 android:id="@+id/high_score_progress_bar"
                 android:layout_width="match_parent"
                 android:layout_height="28dp"

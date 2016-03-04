@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MapQuiz</string>
+    <string name="app_name">PlaceQuiz</string>
     <string name="game_activity">Game</string>
     <string name="summary_activity">Summary</string>
 
     <string name="no_network_title">No Network Found</string>
-    <string name="no_network_message">MapQuiz requires a network connection in order to work.
+    <string name="no_network_message">PlaceQuiz requires a network connection in order to work.
         Please connect to an internet connection to continue.</string>
+    <string name="should_use_wifi">Wifi Not Detected</string>
+    <string name="should_use_wifi_message">PlaceQuiz uses a lot of data, and should be connected to
+        a Wifi connection if mobile data fees and rates apply. Do you want to continue anyways?</string>
 
-    <string name="pick_email">MapQuiz requires you to pick a username to store data</string>
+    <string name="pick_email">PlaceQuiz requires you to pick a username to store data</string>
 
     <string name="correct">Correct!</string>
     <string name="wrong">Wrong!</string>
@@ -24,13 +27,15 @@
     <string name="dialog_incorrect_answer">Incorrect Answer</string>
     <string name="play_again">Play Again?</string>
     <string name="game_over">Game Over</string>
-    <string name="game_heading">#difficulty#</string>
+    <string name="game_heading">#gametype#</string>
     <string name="back_to_menu">Back to menu</string>
     <string name="quit">Quit</string>
+    <string name="done_button">Done</string>
 
-    <string name="to_the_death_button">To the death!</string>
+    <string name="to_the_death_button">Challenge</string>
     <string name="test_reset_database">Reset Database</string>
     <string name="best_of_10_button">Best of 10</string>
+    <string name="unlimited_button">Unlimited</string>
     <string name="quit_game">Exit</string>
 
     <string name="easy_mode">Easy</string>
